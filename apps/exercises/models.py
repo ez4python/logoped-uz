@@ -10,17 +10,22 @@ class Exercise(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Exercise'
+        verbose_name_plural = 'Exercises'
+        db_table = 'exercises'
+
 
 class Assignment(models.Model):
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    exercise = models.ForeignKey('exercises.Exercise', on_delete=models.CASCADE)
     student = models.ForeignKey(
-        'apps.User',
+        'users.User',
         on_delete=models.CASCADE,
         related_name='student_assignments',
         limit_choices_to={'is_student': True}
     )
     therapist = models.ForeignKey(
-        'apps.User',
+        'users.User',
         on_delete=models.CASCADE,
         related_name='therapist_assignments',
         limit_choices_to={'is_therapist': True}
@@ -31,9 +36,14 @@ class Assignment(models.Model):
     def __str__(self):
         return f"{self.exercise.title} → {self.student.get_full_name()}"
 
+    class Meta:
+        verbose_name = 'Assignment'
+        verbose_name_plural = 'Assignments'
+        db_table = 'assignments'
+
 
 class Submission(models.Model):
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    assignment = models.ForeignKey('exercises.Assignment', on_delete=models.CASCADE)
     submitted_at = models.DateTimeField(auto_now_add=True)
     audio_answer = models.FileField(upload_to='submissions/audio/', blank=True, null=True)
     text_answer = models.TextField(blank=True)
@@ -43,3 +53,8 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"{self.assignment} - Submission"
+
+    class Meta:
+        verbose_name = 'Submission'
+        verbose_name_plural = 'Submissions'
+        db_table = 'submissions'

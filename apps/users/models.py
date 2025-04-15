@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from apps.users.managers import CustomUserManager
+
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=150)
@@ -18,5 +20,12 @@ class User(AbstractUser):
     username = None
     email = None
 
+    objects = CustomUserManager()
+
     def __str__(self):
         return f"{self.get_full_name()} - ({self.phone_number})"
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+        db_table = 'users'
