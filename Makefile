@@ -12,3 +12,4 @@ admin:
 clean-migrations:
 	find apps/ -path "*/migrations/*.py" ! -name "__init__.py" -delete
 	rm -rf db.sqlite3
+

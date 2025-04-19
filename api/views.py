@@ -6,10 +6,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from api.serializers import UserAuthCodeSerializer
+
 
 @extend_schema(
     tags=['Auth'],
     methods=['POST'],
+    request=UserAuthCodeSerializer,
     description='User telefon raqamini kiritib, responseda 6-xonali, raqamli kod oladi.',
     responses={200: dict, 400: dict, 500: dict}
 )
