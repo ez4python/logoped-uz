@@ -13,3 +13,5 @@ clean-migrations:
 	find apps/ -path "*/migrations/*.py" ! -name "__init__.py" -delete
 	rm -rf db.sqlite3
 
+run:
+	docker start logoped_redis
