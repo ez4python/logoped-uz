@@ -15,3 +15,6 @@ clean-migrations:
 
 run:
 	docker start logoped_redis
+
+check:
+	docker exec -it redis_db redis-cli keys '*'

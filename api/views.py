@@ -19,11 +19,16 @@ from api.serializers import UserAuthCodeSerializer
 class UserAuthCodeAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
-        phone_number = request.data.get('phone_number')
-        six_digits_pass = str(randint(100000, 999999))
-        cache.set(
-            key=phone_number,
-            value=six_digits_pass,
-            timeout=60,
-        )
-        return Response({'code': six_digits_pass}, status=status.HTTP_200_OK)
+        serializer = UserAuthCodeSerializer(data=request.data)
+
+        if serializer.is_valid():
+            phone_number = serializer.validated_data.get('phone_number')
+            six_digits_pass = str(randint(100000, 999999))
+            cache.set(
+                key=phone_number,
+                value=six_digits_pass,
+                timeout=60,
+            )
+            return Response({'code': six_digits_pass}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
