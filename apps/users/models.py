@@ -6,7 +6,7 @@ from apps.users.managers import CustomUserManager
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150, null=True)
     phone_number = models.CharField(max_length=20, unique=True)
     image = models.ImageField(upload_to='user_images/', blank=True, null=True)
 
