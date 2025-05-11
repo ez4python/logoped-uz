@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Логопед Онлайн{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ static('css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+{% block content %}{% endblock %}
+
+<footer class="mt-auto py-6 bg-white border-t">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <p class="text-gray-600 text-sm">&copy; {{ now().year }} Логопед Онлайн. Salohiddinov Akbarali, 321-21, TATU.</p>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-600 hover:text-primary-600 text-sm">Политика конфиденциальности</a>
+                <a href="#" class="text-gray-600 hover:text-primary-600 text-sm">Условия использования</a>
+                <a href="#" class="text-gray-600 hover:text-primary-600 text-sm">Контакты</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

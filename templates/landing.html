@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Логопед Онлайн - Исправление речевых нарушений{% endblock %}
+
+{% block content %}
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="{{ static('images/logo.svg') }}" alt="Логопед Онлайн" class="h-10">
+                    <span class="ml-2 text-xl font-semibold text-gray-800">Логопед Онлайн</span>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="{{ url('login') }}" class="btn btn-outline">Войти</a>
+                    <a href="{{ url('register') }}" class="btn btn-primary">Зарегистрироваться</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        &lt;!-- Hero Section -->
+        <section class="py-16 md:py-24 bg-primary-light">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Исправляем речевые нарушения
+                            онлайн</h1>
+                        <p class="text-xl text-gray-700 mb-8">Профессиональная платформа для коррекции
+                            фонетико-фонематических нарушений с индивидуальным подходом к каждому ребенку.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="{{ url('register') }}" class="btn btn-primary text-lg px-8 py-3">Начать
+                                бесплатно</a>
+                            <a href="#how-it-works" class="btn btn-outline text-lg px-8 py-3">Как это работает</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="{{ static('images/hero-image.svg') }}" alt="Логопедические занятия"
+                             class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        &lt;!-- Для кого Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Для кого наша платформа</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-6">
+                        <div class="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Дети с нарушениями речи</h3>
+                        <p class="text-gray-700">Наши курсы помогают детям преодолеть фонетико-фонематические нарушения
+                            и улучшить произношение звуков.</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Родители</h3>
+                        <p class="text-gray-700">Помогаем родителям участвовать в процессе коррекции речи ребенка и
+                            отслеживать прогресс занятий.</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Логопеды</h3>
+                        <p class="text-gray-700">Предоставляем инструменты для эффективной работы с детьми и мониторинга
+                            их прогресса в удобном формате.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        &lt;!-- Как это работает Section -->
+        <section id="how-it-works" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Как это работает</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 text-white text-xl font-bold">
+                            1
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Регистрация</h3>
+                        <p class="text-gray-700">Создайте аккаунт, указав только номер телефона для получения доступа к
+                            платформе.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 text-white text-xl font-bold">
+                            2
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Выбор курса</h3>
+                        <p class="text-gray-700">Выберите подходящий курс из каталога в зависимости от речевых
+                            нарушений.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 text-white text-xl font-bold">
+                            3
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Выполнение упражнений</h3>
+                        <p class="text-gray-700">Проходите упражнения в удобном темпе, получая обратную связь от
+                            специалистов.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 text-white text-xl font-bold">
+                            4
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Отслеживание прогресса</h3>
+                        <p class="text-gray-700">Наблюдайте за улучшениями и получайте рекомендации для дальнейшего
+                            развития.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        &lt;!-- Преимущества Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Наши преимущества</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Профессиональный подход</h3>
+                            <p class="text-gray-700">Все курсы разработаны опытными логопедами с учетом современных
+                                методик коррекции речи.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Удобный график</h3>
+                            <p class="text-gray-700">Занимайтесь в любое удобное время, без привязки к расписанию и
+                                местоположению.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Индивидуальный подход</h3>
+                            <p class="text-gray-700">Каждый курс адаптируется под конкретные потребности ребенка с
+                                учетом его особенностей.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Обратная связь</h3>
+                            <p class="text-gray-700">Получайте комментарии и рекомендации от специалистов после каждого
+                                выполненного упражнения.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        &lt;!-- CTA Section -->
+        <section class="py-16 bg-primary">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-white mb-6">Начните исправлять речевые нарушения уже сегодня</h2>
+                <p class="text-xl text-white opacity-90 mb-8 max-w-3xl mx-auto">Присоединяйтесь к нашей платформе и
+                    помогите вашему ребенку говорить правильно и уверенно.</p>
+                <a href="{{ url('register') }}" class="btn bg-white text-primary hover:bg-gray-100 text-lg px-8 py-3">Зарегистрироваться
+                    бесплатно</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Вход - Логопед Онлайн{% endblock %}
+
+{% block content %}
+    <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <img src="{{ static('images/logo.svg') }}" alt="Логопед Онлайн" class="mx-auto h-12 w-auto">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Вход в аккаунт</h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Еще нет аккаунта?
+                <a href="{{ url('register') }}" class="font-medium text-primary hover:text-primary-hover">Зарегистрироваться</a>
+            </p>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <form class="space-y-6" action="{{ url('login_phone') }}" method="POST" x-data="{ phone: '' }">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Номер телефона</label>
+                        <div class="mt-1">
+                            <input id="phone" name="phone" type="tel" autocomplete="tel" required
+                                   class="form-control"
+                                   placeholder="+998 XX XXX XX XX"
+                                   x-model="phone"
+                                   x-mask="+998 99 999 99 99">
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full btn btn-primary">
+                            Получить код
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">
+                            Или вернуться на
+                        </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <a href="{{ url('landing') }}"
+                           class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                            Главную страницу
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://unpkg.com/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}

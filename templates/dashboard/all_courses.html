@@ -1,0 +1,168 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Все курсы - Логопед Онлайн{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold text-gray-900">Все курсы</h1>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %} mb-6">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="bg-white shadow rounded-lg p-6 mb-6">
+        <form action="{{ url('all_courses') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+            <div class="flex-1">
+                <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Поиск курсов</label>
+                <input type="text" name="search" id="search" class="form-control" placeholder="Введите название курса"
+                       value="{{ request.GET.search }}">
+            </div>
+            <div class="w-full md:w-48">
+                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Категория</label>
+                <select name="category" id="category" class="form-control">
+                    <option value="">Все категории</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}"
+                                {% if request.GET.category == category.id|stringformat:"i" %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="btn btn-primary h-10">Найти</button>
+            </div>
+        </form>
+    </div>
+
+    {% if courses %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for course in courses %}
+                <div class="card overflow-hidden">
+                    <div class="relative pb-1/2">
+                        {% if course.image %}
+                            <img src="{{ course.image.url }}" alt="{{ course.title }}"
+                                 class="absolute h-full w-full object-cover">
+                        {% else %}
+                            <div class="absolute h-full w-full bg-primary-light flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-primary" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-lg font-semibold text-gray-900">{{ course.title }}</h2>
+                            {% if course.is_enrolled %}
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Записаны
+                            </span>
+                            {% endif %}
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">{{ course.description|truncatechars:100 }}</p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                <span>{{ course.exercises_count }} упражнений</span>
+                            </div>
+                            {% if course.is_enrolled %}
+                                <a href="{{ url('course_detail', args=[course.id]) }}" class="btn btn-primary">Продолжить</a>
+                            {% else %}
+                                <form action="{{ url('enroll_course', args=[course.id]) }}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Записаться</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if courses.has_other_pages %}
+            <div class="flex justify-center mt-8">
+                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    {% if courses.has_previous %}
+                        <a href="?page=
+                                {{ courses.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
+                           class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Предыдущая</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                 fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </a>
+                    {% else %}
+                        <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-gray-100 text-sm font-medium text-gray-400">
+                        <span class="sr-only">Предыдущая</span>
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </span>
+                    {% endif %}
+
+                    {% for i in courses.paginator.page_range %}
+                        {% if courses.number == i %}
+                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary text-sm font-medium text-white">
+                            {{ i }}
+                        </span>
+                        {% else %}
+                            <a href="?page=
+                                    {{ i }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
+                               class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                {{ i }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if courses.has_next %}
+                        <a href="?page=
+                                {{ courses.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
+                           class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Следующая</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                 fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </a>
+                    {% else %}
+                        <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-gray-100 text-sm font-medium text-gray-400">
+                        <span class="sr-only">Следующая</span>
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </span>
+                    {% endif %}
+                </nav>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+            <div class="mx-auto w-24 h-24 bg-primary-light rounded-full flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Курсы не найдены</h2>
+            <p class="text-gray-600 mb-6">Попробуйте изменить параметры поиска или вернитесь позже</p>
+            <a href="{{ url('all_courses') }}" class="btn btn-primary">Сбросить фильтры</a>
+        </div>
+    {% endif %}
+{% endblock %}

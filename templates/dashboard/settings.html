@@ -1,0 +1,123 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Настройки профиля - Логопед Онлайн{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold text-gray-900">Настройки профиля</h1>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %} mb-6">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="p-6">
+            <form action="{{ url('settings') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <div class="flex flex-col items-center">
+                        <div class="mb-4">
+                            {% if user.profile_image %}
+                                <img src="{{ user.profile_image.url }}" alt="{{ user.full_name }}"
+                                     class="h-32 w-32 rounded-full object-cover">
+                            {% else %}
+                                <div class="avatar avatar-lg">
+                                    {% if user.full_name %}
+                                        {{ user.full_name|first }}
+                                    {% else %}
+                                        У
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="profile_image" class="btn btn-outline cursor-pointer">
+                                Изменить фото
+                                <input id="profile_image" name="profile_image" type="file" class="hidden"
+                                       accept="image/*">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 space-y-4">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-gray-700">Имя</label>
+                                <input type="text" name="first_name" id="first_name" class="form-control"
+                                       value="{{ user.first_name }}">
+                            </div>
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium text-gray-700">Фамилия</label>
+                                <input type="text" name="last_name" id="last_name" class="form-control"
+                                       value="{{ user.last_name }}">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Номер телефона</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="tel" name="phone" id="phone" disabled class="form-control bg-gray-100"
+                                       value="{{ user.phone }}">
+                                <a href="{{ url('change_phone') }}"
+                                   class="ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                    Изменить
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email
+                                (необязательно)</label>
+                            <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 border-t border-gray-200">
+                    <div class="flex justify-end">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Безопасность</h2>
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="p-6">
+                <div class="mb-6">
+                    <h3 class="text-lg font-medium text-gray-900">Изменение номера телефона</h3>
+                    <p class="mt-1 text-sm text-gray-500">
+                        Вы можете изменить номер телефона, который используется для входа в аккаунт.
+                    </p>
+                    <div class="mt-4">
+                        <a href="{{ url('change_phone') }}" class="btn btn-outline">Изменить номер телефона</a>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-gray-200">
+                    <h3 class="text-lg font-medium text-red-600">Удаление аккаунта</h3>
+                    <p class="mt-1 text-sm text-gray-500">
+                        После удаления аккаунта все ваши данные будут безвозвратно удалены. Эту операцию нельзя
+                        отменить.
+                    </p>
+                    <div class="mt-4">
+                        <button type="button"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                onclick="if(confirm('Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить.')) { window.location.href = '
+                                        {{ url('delete_account') }}'; }">
+                            Удалить аккаунт
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,314 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}{{ exercise.title }} - Логопед Онлайн{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center">
+            <a href="{{ url('course_detail', args=[course.id]) }}" class="text-gray-500 hover:text-gray-700 mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                          clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <h1 class="text-2xl font-semibold text-gray-900">{{ exercise.title }}</h1>
+        </div>
+        <div class="text-sm text-gray-500">
+            Упражнение {{ exercise.order }} из {{ total_exercises }}
+        </div>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %} mb-6">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="p-6">
+            <div class="prose max-w-none">
+                {{ exercise.content|safe }}
+            </div>
+
+            {% if exercise.image %}
+                <div class="mt-6">
+                    <img src="{{ exercise.image.url }}" alt="{{ exercise.title }}" class="rounded-lg max-w-full h-auto">
+                </div>
+            {% endif %}
+
+            {% if exercise.audio %}
+                <div class="mt-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Аудио материал</h3>
+                    <audio controls class="w-full">
+                        <source src="{{ exercise.audio.url }}" type="audio/mpeg">
+                        Ваш браузер не поддерживает аудио элемент.
+                    </audio>
+                </div>
+            {% endif %}
+
+            {% if exercise.video %}
+                <div class="mt-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Видео материал</h3>
+                    <video controls class="w-full rounded-lg">
+                        <source src="{{ exercise.video.url }}" type="video/mp4">
+                        Ваш браузер не поддерживает видео элемент.
+                    </video>
+                </div>
+            {% endif %}
+
+            <div class="mt-8">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Выполнение упражнения</h3>
+
+                {% if exercise.type == 'audio_recording' %}
+                    <div x-data="{ recording: false, audioBlob: null, audioUrl: null, timer: 0, timerInterval: null }">
+                        <div class="mb-4">
+                            <p class="text-gray-700 mb-2">Запишите аудио с выполнением упражнения:</p>
+                            <div class="flex items-center space-x-4">
+                                <button
+                                        x-show="!recording"
+                                        @click="
+                                    recording = true;
+                                    timer = 0;
+                                    timerInterval = setInterval(() => { timer++ }, 1000);
+                                    navigator.mediaDevices.getUserMedia({ audio: true })
+                                        .then(stream => {
+                                            mediaRecorder = new MediaRecorder(stream);
+                                            mediaRecorder.start();
+
+                                            const audioChunks = [];
+                                            mediaRecorder.addEventListener('dataavailable', event => {
+                                                audioChunks.push(event.data);
+                                            });
+
+                                            mediaRecorder.addEventListener('stop', () => {
+                                                audioBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+                                                audioUrl = URL.createObjectURL(audioBlob);
+                                                stream.getTracks().forEach(track => track.stop());
+                                            });
+                                        });
+                                "
+                                        class="btn btn-primary flex items-center"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                         fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                              d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                    Начать запись
+                                </button>
+
+                                <button
+                                        x-show="recording"
+                                        @click="
+                                    recording = false;
+                                    clearInterval(timerInterval);
+                                    mediaRecorder.stop();
+                                "
+                                        class="btn bg-red-600 hover:bg-red-700 text-white flex items-center"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                         fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                    Остановить запись
+                                </button>
+
+                                <div x-show="recording" class="text-gray-700">
+                                    <span x-text="Math.floor(timer / 60).toString().padStart(2, '0') + ':' + (timer % 60).toString().padStart(2, '0')"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div x-show="audioUrl" class="mb-4">
+                            <p class="text-gray-700 mb-2">Прослушайте запись:</p>
+                            <audio x-bind:src="audioUrl" controls class="w-full"></audio>
+                        </div>
+
+                        <form action="{{ url('submit_exercise', args=[course.id, exercise.id]) }}" method="POST"
+                              enctype="multipart/form-data" class="mt-6">
+                            {% csrf_token %}
+                            <input type="hidden" name="exercise_type" value="audio_recording">
+                            <div x-show="audioBlob" class="mb-4">
+                                <input type="file" name="audio_file" id="audio_file" class="hidden" accept="audio/*">
+                                <p class="text-gray-700 mb-2">Если вы довольны записью, отправьте ее на проверку:</p>
+                                <button type="button"
+                                        @click="
+                                        const dataTransfer = new DataTransfer();
+                                        const file = new File([audioBlob], 'recording.mp3', { type: 'audio/mpeg' });
+                                        dataTransfer.items.add(file);
+                                        document.getElementById('audio_file').files = dataTransfer.files;
+                                    "
+                                        class="btn btn-outline mb-4">
+                                    Прикрепить запись
+                                </button>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Комментарий
+                                    (необязательно)</label>
+                                <textarea id="comment" name="comment" rows="3" class="form-control"></textarea>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button type="submit" class="btn btn-primary">Отправить на проверку</button>
+                            </div>
+                        </form>
+                    </div>
+                {% elif exercise.type == 'text_answer' %}
+                    <form action="{{ url('submit_exercise', args=[course.id, exercise.id]) }}" method="POST"
+                          class="space-y-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="exercise_type" value="text_answer">
+
+                        <div>
+                            <label for="answer" class="block text-sm font-medium text-gray-700 mb-1">Ваш ответ</label>
+                            <textarea id="answer" name="answer" rows="5" class="form-control" required></textarea>
+                        </div>
+
+                        <div>
+                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Комментарий
+                                (необязательно)</label>
+                            <textarea id="comment" name="comment" rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" class="btn btn-primary">Отправить на проверку</button>
+                        </div>
+                    </form>
+                {% elif exercise.type == 'file_upload' %}
+                    <form action="{{ url('submit_exercise', args=[course.id, exercise.id]) }}" method="POST"
+                          enctype="multipart/form-data" class="space-y-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="exercise_type" value="file_upload">
+
+                        <div>
+                            <label for="file" class="block text-sm font-medium text-gray-700 mb-1">Загрузите
+                                файл</label>
+                            <input type="file" id="file" name="file" class="form-control" required>
+                            <p class="mt-1 text-xs text-gray-500">Поддерживаемые форматы: .jpg, .png, .pdf, .doc,
+                                .docx</p>
+                        </div>
+
+                        <div>
+                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Комментарий
+                                (необязательно)</label>
+                            <textarea id="comment" name="comment" rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" class="btn btn-primary">Отправить на проверку</button>
+                        </div>
+                    </form>
+                {% elif exercise.type == 'quiz' %}
+                    <form action="{{ url('submit_exercise', args=[course.id, exercise.id]) }}" method="POST"
+                          class="space-y-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="exercise_type" value="quiz">
+
+                        {% for question in exercise.questions %}
+                            <div class="mb-6">
+                                <h4 class="text-base font-medium text-gray-900 mb-2">{{ question.text }}</h4>
+                                <div class="space-y-2">
+                                    {% for option in question.options %}
+                                        <div class="flex items-center">
+                                            <input id="option-{{ question.id }}-{{ option.id }}"
+                                                   name="question_{{ question.id }}" type="radio"
+                                                   value="{{ option.id }}"
+                                                   class="h-4 w-4 text-primary focus:ring-primary border-gray-300"
+                                                   required>
+                                            <label for="option-{{ question.id }}-{{ option.id }}"
+                                                   class="ml-3 block text-sm font-medium text-gray-700">
+                                                {{ option.text }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div>
+                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Комментарий
+                                (необязательно)</label>
+                            <textarea id="comment" name="comment" rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" class="btn btn-primary">Отправить на проверку</button>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if feedback %}
+        <div class="mt-6 bg-white shadow rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Обратная связь от преподавателя</h2>
+
+                <div class="mb-4">
+                    <div class="flex items-center mb-2">
+                        <div class="mr-2">
+                            {% if feedback.status == 'good' %}
+                                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            {% else %}
+                                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900">
+                                {% if feedback.status == 'good' %}
+                                    Отлично! Упражнение выполнено правильно.
+                                {% else %}
+                                    Упражнение требует доработки.
+                                {% endif %}
+                            </h3>
+                            <p class="text-sm text-gray-500">{{ feedback.created_at|date:"d.m.Y H:i" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-gray-50 rounded-lg p-4">
+                        <p class="text-gray-700">{{ feedback.comment }}</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    {% if feedback.status == 'good' and next_exercise %}
+                        <a href="{{ url('exercise_detail', args=[course.id, next_exercise.id]) }}"
+                           class="btn btn-primary">
+                            Перейти к следующему упражнению
+                        </a>
+                    {% elif feedback.status != 'good' %}
+                        <a href="{{ url('exercise_detail', args=[course.id, exercise.id]) }}" class="btn btn-primary">
+                            Попробовать снова
+                        </a>
+                    {% else %}
+                        <a href="{{ url('course_detail', args=[course.id]) }}" class="btn btn-primary">
+                            Вернуться к курсу
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
