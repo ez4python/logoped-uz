@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Введите ваше имя - Логопед Онлайн{% endblock %}
+
+{% block content %}
+    <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="mx-auto h-12 w-auto">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Как вас зовут?</h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Пожалуйста, введите ваше полное имя
+            </p>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <form class="space-y-6" action="{% url 'set_fullname' %}" method="POST">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div>
+                        <label for="full_name" class="block text-sm font-medium text-gray-700">Полное имя</label>
+                        <div class="mt-1">
+                            <input id="full_name" name="full_name" type="text" required
+                                   class="form-control"
+                                   placeholder="Иванов Иван Иванович">
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full btn btn-primary">
+                            Продолжить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

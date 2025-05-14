@@ -1,17 +1,18 @@
-&lt;!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Логопед Онлайн{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ static('css/styles.css') }}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     {% block extra_head %}{% endblock %}
 </head>
 <body class="bg-gray-50 min-h-screen" x-data="{ sidebarOpen: false }">
 <div class="flex h-screen overflow-hidden">
-    &lt;!-- Sidebar для мобильных устройств -->
+    <!-- Sidebar для мобильных устройств -->
     <div x-show="sidebarOpen"
          class="fixed inset-0 z-40 flex md:hidden"
          x-transition:enter="transition-opacity ease-linear duration-300"
@@ -53,11 +54,11 @@
 
             <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                 <div class="flex-shrink-0 flex items-center px-4">
-                    <img src="{{ static('images/logo.svg') }}" alt="Логопед Онлайн" class="h-8 w-auto">
+                    <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="h-8 w-auto">
                     <span class="ml-2 text-xl font-semibold text-gray-800">Логопед Онлайн</span>
                 </div>
                 <nav class="mt-5 px-2 space-y-1">
-                    <a href="{{ url('dashboard') }}"
+                    <a href="{% url 'dashboard' %}"
                        class="{% if active_page == 'dashboard' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
                         <svg class="mr-4 h-6 w-6 {% if active_page == 'dashboard' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -68,7 +69,7 @@
                         Мои курсы
                     </a>
 
-                    <a href="{{ url('all_courses') }}"
+                    <a href="{% url 'all_courses' %}"
                        class="{% if active_page == 'all_courses' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
                         <svg class="mr-4 h-6 w-6 {% if active_page == 'all_courses' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -79,7 +80,18 @@
                         Все курсы
                     </a>
 
-                    <a href="{{ url('settings') }}"
+                    <a href="{% url 'chat_list' %}"
+                       class="{% if active_page == 'chats' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <svg class="mr-4 h-6 w-6 {% if active_page == 'chats' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                             aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                        Чаты
+                    </a>
+
+                    <a href="{% url 'settings' %}"
                        class="{% if active_page == 'settings' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
                         <svg class="mr-4 h-6 w-6 {% if active_page == 'settings' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -92,7 +104,7 @@
                         Настройки
                     </a>
 
-                    <a href="{{ url('help') }}"
+                    <a href="{% url 'help' %}"
                        class="{% if active_page == 'help' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
                         <svg class="mr-4 h-6 w-6 {% if active_page == 'help' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -103,7 +115,7 @@
                         Помощь
                     </a>
 
-                    <a href="{{ url('logout') }}"
+                    <a href="{% url 'logout' %}"
                        class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
                         <svg class="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -116,16 +128,16 @@
                 </nav>
             </div>
             <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-                <a href="{{ url('settings') }}" class="flex-shrink-0 group block">
+                <a href="{% url 'settings' %}" class="flex-shrink-0 group block">
                     <div class="flex items-center">
                         <div>
-                            {% if user.profile_image %}
-                                <img class="inline-block h-10 w-10 rounded-full" src="{{ user.profile_image.url }}"
-                                     alt="{{ user.full_name }}">
+                            {% if user.image %}
+                                <img class="inline-block h-10 w-10 rounded-full" src="{{ user.image.url }}"
+                                     alt="{{ user.get_full_name }}">
                             {% else %}
                                 <div class="avatar">
-                                    {% if user.full_name %}
-                                        {{ user.full_name|first }}
+                                    {% if user.get_full_name %}
+                                        {{ user.get_full_name|first }}
                                     {% else %}
                                         У
                                     {% endif %}
@@ -134,14 +146,14 @@
                         </div>
                         <div class="ml-3">
                             <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                                {% if user.full_name %}
-                                    {{ user.full_name }}
+                                {% if user.get_full_name %}
+                                    {{ user.get_full_name }}
                                 {% else %}
                                     Пользователь
                                 {% endif %}
                             </p>
                             <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                                {{ user.phone }}
+                                {{ user.phone_number }}
                             </p>
                         </div>
                     </div>
@@ -150,21 +162,21 @@
         </div>
 
         <div class="flex-shrink-0 w-14">
-            &lt;!-- Заглушка для обеспечения фокуса на кнопке закрытия -->
+            <!-- Заглушка для обеспечения фокуса на кнопке закрытия -->
         </div>
     </div>
 
-    &lt;!-- Статический боковой сайдбар для десктопов -->
+    <!-- Статический боковой сайдбар для десктопов -->
     <div class="hidden md:flex md:flex-shrink-0">
         <div class="flex flex-col w-64">
             <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
                 <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                     <div class="flex items-center flex-shrink-0 px-4">
-                        <img src="{{ static('images/logo.svg') }}" alt="Логопед Онлайн" class="h-8 w-auto">
+                        <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="h-8 w-auto">
                         <span class="ml-2 text-xl font-semibold text-gray-800">Логопед Онлайн</span>
                     </div>
                     <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
-                        <a href="{{ url('dashboard') }}"
+                        <a href="{% url 'dashboard' %}"
                            class="{% if active_page == 'dashboard' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             <svg class="mr-3 h-6 w-6 {% if active_page == 'dashboard' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -175,7 +187,7 @@
                             Мои курсы
                         </a>
 
-                        <a href="{{ url('all_courses') }}"
+                        <a href="{% url 'all_courses' %}"
                            class="{% if active_page == 'all_courses' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             <svg class="mr-3 h-6 w-6 {% if active_page == 'all_courses' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -186,7 +198,18 @@
                             Все курсы
                         </a>
 
-                        <a href="{{ url('settings') }}"
+                        <a href="{% url 'chat_list' %}"
+                           class="{% if active_page == 'chats' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <svg class="mr-3 h-6 w-6 {% if active_page == 'chats' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            Чаты
+                        </a>
+
+                        <a href="{% url 'settings' %}"
                            class="{% if active_page == 'settings' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             <svg class="mr-3 h-6 w-6 {% if active_page == 'settings' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -199,7 +222,7 @@
                             Настройки
                         </a>
 
-                        <a href="{{ url('help') }}"
+                        <a href="{% url 'help' %}"
                            class="{% if active_page == 'help' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             <svg class="mr-3 h-6 w-6 {% if active_page == 'help' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -210,7 +233,7 @@
                             Помощь
                         </a>
 
-                        <a href="{{ url('logout') }}"
+                        <a href="{% url 'logout' %}"
                            class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             <svg class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -223,16 +246,16 @@
                     </nav>
                 </div>
                 <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-                    <a href="{{ url('settings') }}" class="flex-shrink-0 w-full group block">
+                    <a href="{% url 'settings' %}" class="flex-shrink-0 w-full group block">
                         <div class="flex items-center">
                             <div>
-                                {% if user.profile_image %}
-                                    <img class="inline-block h-9 w-9 rounded-full" src="{{ user.profile_image.url }}"
-                                         alt="{{ user.full_name }}">
+                                {% if user.image %}
+                                    <img class="inline-block h-9 w-9 rounded-full" src="{{ user.image.url }}"
+                                         alt="{{ user.get_full_name }}">
                                 {% else %}
                                     <div class="avatar">
-                                        {% if user.full_name %}
-                                            {{ user.full_name|first }}
+                                        {% if user.get_full_name %}
+                                            {{ user.get_full_name|first }}
                                         {% else %}
                                             У
                                         {% endif %}
@@ -241,24 +264,20 @@
                             </div>
                             <div class="ml-3">
                                 <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                    {% if user.full_name %}
-                                        {{ user.full_name }}
+                                    {% if user.get_full_name %}
+                                        {{ user.get_full_name }}
                                     {% else %}
                                         Пользователь
                                     {% endif %}
                                 </p>
                                 <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                    {{ user.phone }}
+                                    {{ user.phone_number }}
                                 </p>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
-
-            Продолжение базового шаблона для авторизованных пользователей:
-
-            ```html file="templates/dashboard/base.html" append="true"
         </div>
     </div>
     <div class="flex flex-col w-0 flex-1 overflow-hidden">

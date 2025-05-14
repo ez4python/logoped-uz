@@ -5,7 +5,7 @@
 {% block dashboard_content %}
     <div class="flex justify-between items-center mb-6">
         <div class="flex items-center">
-            <a href="{{ url('dashboard') }}" class="text-gray-500 hover:text-gray-700 mr-2">
+            <a href="{% url 'dashboard' %}" class="text-gray-500 hover:text-gray-700 mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"
                           d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
@@ -118,7 +118,7 @@
                                         Выполнено
                                     </span>
                                     {% elif exercise.is_available %}
-                                        <a href="{{ url('exercise_detail', args=[course.id, exercise.id]) }}"
+                                        <a href="{% url 'exercise_detail' course.id exercise.id %}"
                                            class="text-primary hover:text-primary-hover text-sm font-medium">
                                             Начать
                                         </a>

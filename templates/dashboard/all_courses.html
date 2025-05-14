@@ -16,7 +16,7 @@
     {% endif %}
 
     <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <form action="{{ url('all_courses') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+        <form action="{% url 'all_courses' %}" method="GET" class="flex flex-col md:flex-row gap-4">
             <div class="flex-1">
                 <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Поиск курсов</label>
                 <input type="text" name="search" id="search" class="form-control" placeholder="Введите название курса"
@@ -71,9 +71,9 @@
                                 <span>{{ course.exercises_count }} упражнений</span>
                             </div>
                             {% if course.is_enrolled %}
-                                <a href="{{ url('course_detail', args=[course.id]) }}" class="btn btn-primary">Продолжить</a>
+                                <a href="{% url 'course_detail' course.id %}" class="btn btn-primary">Продолжить</a>
                             {% else %}
-                                <form action="{{ url('enroll_course', args=[course.id]) }}" method="POST">
+                                <form action="{% url 'enroll_course' course.id %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-primary">Записаться</button>
                                 </form>
@@ -162,7 +162,7 @@
             </div>
             <h2 class="text-xl font-semibold text-gray-900 mb-2">Курсы не найдены</h2>
             <p class="text-gray-600 mb-6">Попробуйте изменить параметры поиска или вернитесь позже</p>
-            <a href="{{ url('all_courses') }}" class="btn btn-primary">Сбросить фильтры</a>
+            <a href="{% url 'all_courses' %}" class="btn btn-primary">Сбросить фильтры</a>
         </div>
     {% endif %}
 {% endblock %}

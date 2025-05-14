@@ -1,0 +1,59 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Подтверждение смены номера - Логопед Онлайн{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold text-gray-900">Подтверждение смены номера</h1>
+    </div>
+
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="p-6">
+            <p class="mb-4 text-gray-700">
+                Мы отправили код подтверждения на номер <span class="font-medium">{{ phone }}</span>
+            </p>
+
+            <form class="space-y-6" action="{% url 'verify_phone_change' %}" method="POST">
+                {% csrf_token %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div>
+                    <label for="verification_code" class="block text-sm font-medium text-gray-700">Код
+                        подтверждения</label>
+                    <div class="mt-1">
+                        <input id="verification_code" name="verification_code" type="text" maxlength="6" required
+                               class="form-control text-center text-xl"
+                               placeholder="Введите 6-значный код"
+                               inputmode="numeric"
+                               pattern="[0-9]{6}"
+                               autocomplete="one-time-code">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="w-full btn btn-primary">
+                        Подтвердить
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Не получили код?
+                    <a href="{% url 'resend_code' %}?phone={{ phone }}"
+                       class="font-medium text-primary hover:text-primary-hover">
+                        Отправить повторно
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
