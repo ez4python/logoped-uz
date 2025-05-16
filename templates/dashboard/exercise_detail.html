@@ -1,6 +1,6 @@
 {% extends "dashboard/base.html" %}
 
-{% block title %}{{ exercise.title }} - Логопед Онлайн{% endblock %}
+{% block title %}{{ assignment.title }} - Логопед Онлайн{% endblock %}
 
 {% block dashboard_content %}
     <div class="flex justify-between items-center mb-6">
@@ -9,13 +9,13 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"
                           d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                          clip-rule="evenodd"/>
+                          clip-rule="evenodd"></path>
                 </svg>
             </a>
-            <h1 class="text-2xl font-semibold text-gray-900">{{ exercise.title }}</h1>
+            <h1 class="text-2xl font-semibold text-gray-900">{{ assignment.title }}</h1>
         </div>
         <div class="text-sm text-gray-500">
-            Упражнение {{ exercise.order }} из {{ total_exercises }}
+            Упражнение {{ assignment.order }} из {{ total_exercises }}
         </div>
     </div>
 
@@ -30,30 +30,30 @@
     <div class="bg-white shadow rounded-lg overflow-hidden">
     <div class="p-6">
         <div class="prose max-w-none">
-            {{ exercise.content|safe }}
+            {{ assignment.content|safe }}
         </div>
 
-        {% if exercise.image %}
+        {% if assignment.image %}
             <div class="mt-6">
-                <img src="{{ exercise.image.url }}" alt="{{ exercise.title }}" class="rounded-lg max-w-full h-auto">
+                <img src="{{ assignment.image.url }}" alt="{{ assignment.title }}" class="rounded-lg max-w-full h-auto">
             </div>
         {% endif %}
 
-        {% if exercise.audio %}
+        {% if assignment.audio %}
             <div class="mt-6">
                 <h3 class="text-lg font-medium text-gray-900 mb-2">Аудио материал</h3>
                 <audio controls class="w-full">
-                    <source src="{{ exercise.audio.url }}" type="audio/mpeg">
+                    <source src="{{ assignment.audio.url }}" type="audio/mpeg">
                     Ваш браузер не поддерживает аудио элемент.
                 </audio>
             </div>
         {% endif %}
 
-        {% if exercise.video %}
+        {% if assignment.video %}
             <div class="mt-6">
                 <h3 class="text-lg font-medium text-gray-900 mb-2">Видео материал</h3>
                 <video controls class="w-full rounded-lg">
-                    <source src="{{ exercise.video.url }}" type="video/mp4">
+                    <source src="{{ assignment.video.url }}" type="video/mp4">
                     Ваш браузер не поддерживает видео элемент.
                 </video>
             </div>
@@ -62,7 +62,7 @@
         <div class="mt-8">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Выполнение упражнения</h3>
 
-            {% if exercise.type == 'audio_recording' %}
+            {% if assignment.type == 'audio_recording' %}
                 <div x-data="{ recording: false, audioBlob: null, audioUrl: null, timer: 0, timerInterval: null }">
                     <div class="mb-4">
                         <p class="text-gray-700 mb-2">Запишите аудио с выполнением упражнения:</p>
@@ -96,7 +96,7 @@
                                      fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
-                                          clip-rule="evenodd"/>
+                                          clip-rule="evenodd"></path>
                                 </svg>
                                 Начать запись
                             </button>
@@ -114,7 +114,7 @@
                                      fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z"
-                                          clip-rule="evenodd"/>
+                                          clip-rule="evenodd"></path>
                                 </svg>
                                 Остановить запись
                             </button>
@@ -130,7 +130,7 @@
                         <audio x-bind:src="audioUrl" controls class="w-full"></audio>
                     </div>
 
-                    <form action="{% url 'submit_exercise' course.id exercise.id %}" method="POST"
+                    <form action="{% url 'submit_exercise' course.id assignment.id %}" method="POST"
                           enctype="multipart/form-data" class="mt-6">
                         {% csrf_token %}
                         <input type="hidden" name="exercise_type" value="audio_recording">
@@ -160,8 +160,8 @@
                         </div>
                     </form>
                 </div>
-            {% elif exercise.type == 'text_answer' %}
-                <form action="{% url 'submit_exercise' course.id exercise.id %}" method="POST" class="space-y-4">
+            {% elif assignment.type == 'text_answer' %}
+                <form action="{% url 'submit_exercise' course.id assignment.id %}" method="POST" class="space-y-4">
                     {% csrf_token %}
                     <input type="hidden" name="exercise_type" value="text_answer">
 
@@ -180,8 +180,8 @@
                         <button type="submit" class="btn btn-primary">Отправить на проверку</button>
                     </div>
                 </form>
-            {% elif exercise.type == 'file_upload' %}
-                <form action="{% url 'submit_exercise' course.id exercise.id %}" method="POST"
+            {% elif assignment.type == 'file_upload' %}
+                <form action="{% url 'submit_exercise' course.id assignment.id %}" method="POST"
                       enctype="multipart/form-data" class="space-y-4">
                     {% csrf_token %}
                     <input type="hidden" name="exercise_type" value="file_upload">
@@ -202,12 +202,12 @@
                         <button type="submit" class="btn btn-primary">Отправить на проверку</button>
                     </div>
                 </form>
-            {% elif exercise.type == 'quiz' %}
-                <form action="{% url 'submit_exercise' course.id exercise.id %}" method="POST" class="space-y-4">
+            {% elif assignment.type == 'quiz' %}
+                <form action="{% url 'submit_exercise' course.id assignment.id %}" method="POST" class="space-y-4">
                     {% csrf_token %}
                     <input type="hidden" name="exercise_type" value="quiz">
 
-                    {% for question in exercise.questions %}
+                    {% for question in assignment.questions %}
                         <div class="mb-6">
                             <h4 class="text-base font-medium text-gray-900 mb-2">{{ question.text }}</h4>
                             <div class="space-y-2">
@@ -254,7 +254,7 @@
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                          clip-rule="evenodd"/>
+                                          clip-rule="evenodd"></path>
                                 </svg>
                             </span>
                             {% else %}
@@ -263,7 +263,7 @@
                                      fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                          clip-rule="evenodd"/>
+                                          clip-rule="evenodd"></path>
                                 </svg>
                             </span>
                             {% endif %}
@@ -287,11 +287,11 @@
 
                 <div class="flex justify-between">
                     {% if feedback.status == 'good' and next_exercise %}
-                        <a href="{% url 'exercise_detail' course.id next_exercise.id %}" class="btn btn-primary">
+                        <a href="{% url 'exercise_detail' course.id next_assignment.id %}" class="btn btn-primary">
                             Перейти к следующему упражнению
                         </a>
                     {% elif feedback.status != 'good' %}
-                        <a href="{% url 'exercise_detail' course.id exercise.id %}" class="btn btn-primary">
+                        <a href="{% url 'exercise_detail' course.id assignment.id %}" class="btn btn-primary">
                             Попробовать снова
                         </a>
                     {% else %}

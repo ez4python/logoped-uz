@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Логопед Онлайн{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
@@ -15,7 +15,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
-                    <img class="h-8 w-auto" src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн">
+{#                    <img class="h-8 w-auto" src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн">#}
                     <span class="ml-2 text-xl font-semibold text-gray-800">Логопед Онлайн</span>
                 </div>
             </div>
@@ -50,7 +50,7 @@
             </div>
         </nav>
         <p class="mt-8 text-center text-base text-gray-400">
-            &copy; 2023 Логопед Онлайн. Все права защищены.
+            &copy; Salohiddinov Akbarali, TUIT, 321-21
         </p>
     </div>
 </footer>

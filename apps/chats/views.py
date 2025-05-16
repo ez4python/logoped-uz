@@ -38,19 +38,19 @@ class ChatListView(LoginRequiredMixin, ListView):
         if user.is_student:
             # Students can chat with their therapists
             queryset = User.objects.filter(
-                therapist_assignments__student=user
+                is_staff=True
             ).distinct().annotate(
                 last_message_time=Subquery(latest_messages),
                 unread_messages=Subquery(unread_count)
             ).order_by('-last_message_time', 'full_name')
-        elif user.is_therapist:
-            # Therapists can chat with their students
-            queryset = User.objects.filter(
-                student_assignments__therapist=user
-            ).distinct().annotate(
-                last_message_time=Subquery(latest_messages),
-                unread_messages=Subquery(unread_count)
-            ).order_by('-last_message_time', 'full_name')
+            # elif user.is_therapist:
+            #     # Therapists can chat with their students
+            #     queryset = User.objects.filter(
+            #         student_assignments__therapist=user
+            #     ).distinct().annotate(
+            #         last_message_time=Subquery(latest_messages),
+            #         unread_messages=Subquery(unread_count)
+            #     ).order_by('-last_message_time', 'full_name')
         elif user.is_staff:
             # Admins can chat with everyone
             queryset = User.objects.exclude(

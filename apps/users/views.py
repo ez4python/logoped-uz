@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.views import View
 from django.views.generic import FormView, TemplateView, UpdateView
 
-from apps.exercises.models import Assignment, Submission
+from apps.exercises.models import Assignment, CompletedAssignment
 from apps.users.forms import (
     PhoneNumberForm, VerificationCodeForm, FullNameForm,
     UserProfileForm, UserAvatarForm, ContactSupportForm
@@ -249,54 +249,22 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Get user's assignments
-        user_assignments = Assignment.objects.filter(student=self.request.user)
+        completed_assignments = CompletedAssignment.objects.filter(user=self.request.user)
+        completed_ids = completed_assignments.values_list('assignment_id', flat=True)
 
-        # Group assignments by exercise to create "courses"
-        user_courses = {}
-        for assignment in user_assignments:
-            exercise = assignment.exercise
-            if exercise.id not in user_courses:
-                user_courses[exercise.id] = {
-                    'id': exercise.id,
-                    'title': exercise.title,
-                    'description': exercise.description,
-                    'image': exercise.image,
-                    'exercises_count': 1,
-                    'assignments': [assignment]
-                }
-            else:
-                user_courses[exercise.id]['exercises_count'] += 1
-                user_courses[exercise.id]['assignments'].append(assignment)
+        all_assignments = Assignment.objects.all()
+        total = all_assignments.count()
+        completed = completed_assignments.count()
 
-        context['user_courses'] = user_courses.values()
+        percentage = int((completed / total) * 100) if total > 0 else 0
 
-        # Calculate progress for each course
-        course_progress = []
-        for course_id, course in user_courses.items():
-            total_exercises = len(course['assignments'])
-            completed_exercises = Submission.objects.filter(
-                assignment__in=course['assignments'],
-                is_checked=True,
-                mark__isnull=False
-            ).count()
-
-            percentage = 0
-            if total_exercises > 0:
-                percentage = int((completed_exercises / total_exercises) * 100)
-
-            course_progress.append({
-                'course': {
-                    'id': course_id,
-                    'title': course['title']
-                },
-                'total_exercises': total_exercises,
-                'completed_exercises': completed_exercises,
-                'percentage': percentage
-            })
-
-        context['course_progress'] = course_progress
+        context['assignments'] = all_assignments
+        context['completed_assignment_ids'] = set(completed_ids)
+        context['total_assignments'] = total
+        context['completed_assignments'] = completed
+        context['completion_percentage'] = percentage
         context['active_page'] = 'dashboard'
+
         return context
 
 

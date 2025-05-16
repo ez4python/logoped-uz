@@ -13,7 +13,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
-    is_therapist = models.BooleanField(default=False)  # логопед
 
     date_joined = models.DateTimeField(default=timezone.now)
 
@@ -34,6 +33,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.phone_number
 
     class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         db_table = 'users'

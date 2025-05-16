@@ -105,20 +105,20 @@
                     <h2 class="text-lg font-semibold text-gray-900">Упражнения</h2>
                 </div>
                 <div class="divide-y divide-gray-200">
-                    {% for exercise in exercises %}
-                        <div class="p-4 {% if exercise.is_available %}exercise-available{% elif exercise.is_completed %}exercise-completed{% else %}exercise-locked{% endif %}">
+                    {% for assignment in assignments %}
+                        <div class="p-4 {% if assignment.is_available %}exercise-available{% elif assignment.is_completed %}exercise-completed{% else %}exercise-locked{% endif %}">
                             <div class="flex justify-between items-start">
                                 <div class="flex-1">
-                                    <h3 class="text-base font-medium text-gray-900">{{ exercise.title }}</h3>
-                                    <p class="text-sm text-gray-500 mt-1">{{ exercise.description|truncatechars:60 }}</p>
+                                    <h3 class="text-base font-medium text-gray-900">{{ assignment.title }}</h3>
+                                    <p class="text-sm text-gray-500 mt-1">{{ assignment.description|truncatechars:60 }}</p>
                                 </div>
                                 <div class="ml-4 flex-shrink-0">
-                                    {% if exercise.is_completed %}
+                                    {% if assignment.is_completed %}
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                         Выполнено
                                     </span>
-                                    {% elif exercise.is_available %}
-                                        <a href="{% url 'exercise_detail' course.id exercise.id %}"
+                                    {% elif assignment.is_available %}
+                                        <a href="{% url 'exercise_detail' course.id assignment.id %}"
                                            class="text-primary hover:text-primary-hover text-sm font-medium">
                                             Начать
                                         </a>
