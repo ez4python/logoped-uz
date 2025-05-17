@@ -23,14 +23,14 @@ class AssignmentAdmin(admin.ModelAdmin):
 
     def has_media(self, obj):
         if obj.audio and obj.video:
-            return "Audio + Video"
+            return "Аудио + Видео"
         elif obj.audio:
-            return "Audio"
+            return "Аудио"
         elif obj.video:
-            return "Video"
+            return "Видео"
         elif obj.image:
-            return "Image"
+            return "Фото"
         else:
-            return "Yo‘q"
+            return "Нет"
 
-    has_media.short_description = "Media mavjudligi"
+    has_media.short_description = "Медиа"

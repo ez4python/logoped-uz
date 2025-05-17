@@ -5,34 +5,34 @@ User = get_user_model()
 
 
 class Course(models.Model):
-    title = models.CharField(max_length=200, verbose_name="Nomi")
-    description = models.TextField(blank=True, verbose_name="Tavsifi")
-    image = models.ImageField(upload_to='courses/images/', verbose_name='Rasm')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yaratilgan vaqt")
+    title = models.CharField(max_length=200, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Описание")
+    image = models.ImageField(upload_to='courses/images/', verbose_name='Фото')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано в")
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = "Kurs"
-        verbose_name_plural = "Kurslar"
+        verbose_name = "Курс"
+        verbose_name_plural = "Курсы"
 
 
 class Assignment(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='assignments', verbose_name="Kurs")
-    title = models.CharField(max_length=200, verbose_name="Topshiriq nomi")
-    description = models.TextField(blank=True, verbose_name="Topshiriq tavsifi")
-    audio = models.FileField(upload_to='assignments/audio/', null=True, blank=True, verbose_name="Audio")
-    video = models.FileField(upload_to='assignments/video/', null=True, blank=True, verbose_name="Video")
-    image = models.ImageField(upload_to='assignments/images/', null=True, blank=True, verbose_name="Rasm")
-    order = models.PositiveIntegerField(default=0, verbose_name="Tartib raqami")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='assignments', verbose_name="Курс")
+    title = models.CharField(max_length=200, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Описание")
+    audio = models.FileField(upload_to='assignments/audio/', null=True, blank=True, verbose_name="Аудио")
+    video = models.FileField(upload_to='assignments/video/', null=True, blank=True, verbose_name="Видео")
+    image = models.ImageField(upload_to='assignments/images/', null=True, blank=True, verbose_name="Фото")
+    order = models.PositiveIntegerField(default=0, verbose_name="Номер последовательности")
 
     def __str__(self):
         return f"{self.course.title} - {self.title}"
 
     class Meta:
-        verbose_name = "Topshiriq"
-        verbose_name_plural = "Topshiriqlar"
+        verbose_name = "Задание"
+        verbose_name_plural = "Задании"
         ordering = ['course', 'order']
 
 
@@ -45,6 +45,6 @@ class CompletedAssignment(models.Model):
         return f"{self.user} completed {self.assignment}"
 
     class Meta:
-        verbose_name = "Bajarilgan topshiriq"
-        verbose_name_plural = "Bajarilgan topshiriqlar"
+        verbose_name = "Выполненное задание"
+        verbose_name_plural = "Выполненные задании"
         unique_together = ('user', 'assignment')

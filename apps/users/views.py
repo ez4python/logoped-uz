@@ -1,14 +1,12 @@
 import random
 import string
-from datetime import timedelta
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-from django.utils import timezone
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView, TemplateView, UpdateView
 

@@ -6,15 +6,15 @@ from apps.users.managers import CustomUserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    phone_number = models.CharField(max_length=20, unique=True)
-    full_name = models.CharField(max_length=100, blank=True)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    phone_number = models.CharField(max_length=20, unique=True, verbose_name="Телефон номер")
+    full_name = models.CharField(max_length=100, blank=True, verbose_name="Ф.И.О")
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name="Аватар")
 
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_student = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True, verbose_name="Активный")
+    is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
+    is_student = models.BooleanField(default=False, verbose_name="Ученик")
 
-    date_joined = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now, verbose_name="Дата регистрации")
 
     objects = CustomUserManager()
 

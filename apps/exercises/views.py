@@ -54,7 +54,6 @@ class EnrollCourseView(LoginRequiredMixin, View):
 
     def post(self, request, course_id):
         course = get_object_or_404(Course, id=course_id)
-
         assignments = Assignment.objects.filter(course=course).order_by('order')
 
         if not assignments.exists():

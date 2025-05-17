@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from django.utils.html import format_html
 
 from django.contrib.auth import get_user_model
@@ -25,3 +26,9 @@ class UserAdmin(admin.ModelAdmin):
         return "Нет аватара"
 
     display_avatar.short_description = 'Аватар'
+
+
+admin.site.unregister(Group)
+admin.site.site_header = "Администрация"
+admin.site.site_title = "Администрация"
+admin.site.index_title = "Добро пожаловать в ТУИТ Логопед"
