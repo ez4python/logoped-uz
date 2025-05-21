@@ -9,6 +9,8 @@ class Course(models.Model):
     description = models.TextField(blank=True, verbose_name="Описание")
     image = models.ImageField(upload_to='courses/images/', verbose_name='Фото')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано в")
+    students = models.ManyToManyField(User, blank=True, related_name='Ученики',
+                                      related_query_name='enrolled_courses')
 
     def __str__(self):
         return self.title
