@@ -8,7 +8,8 @@ from apps.users.managers import CustomUserManager
 class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=20, unique=True, verbose_name="Телефон номер")
     full_name = models.CharField(max_length=100, blank=True, verbose_name="Ф.И.О")
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name="Аватар")
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.jpg', null=True, blank=True,
+                               verbose_name="Аватар")
 
     is_active = models.BooleanField(default=True, verbose_name="Активный")
     is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
