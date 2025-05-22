@@ -51,7 +51,7 @@
                 <div class="space-y-4">
                     {% for message in chat_messages %}
                         <div class="flex {% if message.sender == request.user %}justify-end{% endif %}">
-                            <div class="{% if message.sender == request.user %}bg-primary text-white{% else %}bg-gray-100 text-gray-800{% endif %} rounded-lg px-4 py-2 max-w-[75%]">
+                            <div class="{% if message.sender == request.user %}bg-primary bg-gray-100 text-gray-900{% else %}bg-gray-100 text-gray-800{% endif %} rounded-lg px-4 py-2 max-w-[75%]">
                                 {% if message.message %}
                                     <div class="text-sm mb-2">{{ message.message }}</div>
                                 {% endif %}

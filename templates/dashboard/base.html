@@ -47,70 +47,71 @@
                     <span class="sr-only">Закрыть меню</span>
                     <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
 
             <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                 <div class="flex-shrink-0 flex items-center px-4">
-{#                    <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="h-8 w-auto">#}
-                    <span class="ml-2 text-xl font-semibold text-gray-800">Логопед Онлайн</span>
+                    {#                    <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="h-8 w-auto">#}
+                    <span class="ml-2 text`-xl font-semibold text-gray-800">Логопед Онлайн</span>
                 </div>
                 <nav class="mt-5 px-2 space-y-1">
                     <a href="{% url 'dashboard' %}"
-                       class="{% if active_page == 'dashboard' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                        <svg class="mr-4 h-6 w-6 {% if active_page == 'dashboard' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                       class="{% if active_page == 'dashboard' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <svg class="mr-4 h-6 w-6 {% if active_page == 'dashboard' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                              aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
                         Мои курсы
                     </a>
 
                     <a href="{% url 'all_courses' %}"
-                       class="{% if active_page == 'all_courses' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                        <svg class="mr-4 h-6 w-6 {% if active_page == 'all_courses' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                       class="{% if active_page == 'all_courses' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <svg class="mr-4 h-6 w-6 {% if active_page == 'all_courses' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                              aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                         </svg>
                         Все курсы
                     </a>
 
                     <a href="{% url 'chat_list' %}"
-                       class="{% if active_page == 'chats' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                        <svg class="mr-4 h-6 w-6 {% if active_page == 'chats' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                       class="{% if active_page == 'chats' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <svg class="mr-4 h-6 w-6 {% if active_page == 'chats' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                              aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                         </svg>
                         Чаты
                     </a>
 
                     <a href="{% url 'settings' %}"
-                       class="{% if active_page == 'settings' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                        <svg class="mr-4 h-6 w-6 {% if active_page == 'settings' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                       class="{% if active_page == 'settings' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <svg class="mr-4 h-6 w-6 {% if active_page == 'settings' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                              aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                         Настройки
                     </a>
 
                     <a href="{% url 'help' %}"
-                       class="{% if active_page == 'help' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                        <svg class="mr-4 h-6 w-6 {% if active_page == 'help' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                       class="{% if active_page == 'help' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <svg class="mr-4 h-6 w-6 {% if active_page == 'help' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                              aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         Помощь
                     </a>
@@ -121,7 +122,7 @@
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                              aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                         </svg>
                         Выход
                     </a>
@@ -172,63 +173,63 @@
             <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
                 <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                     <div class="flex items-center flex-shrink-0 px-4">
-{#                        <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="h-8 w-auto">#}
+                        {#                        <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="h-8 w-auto">#}
                         <span class="ml-2 text-xl font-semibold text-gray-800">Логопед Онлайн</span>
                     </div>
                     <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
                         <a href="{% url 'dashboard' %}"
-                           class="{% if active_page == 'dashboard' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                            <svg class="mr-3 h-6 w-6 {% if active_page == 'dashboard' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                           class="{% if active_page == 'dashboard' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <svg class="mr-3 h-6 w-6 {% if active_page == 'dashboard' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                             </svg>
                             Мои курсы
                         </a>
 
                         <a href="{% url 'all_courses' %}"
-                           class="{% if active_page == 'all_courses' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                            <svg class="mr-3 h-6 w-6 {% if active_page == 'all_courses' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                           class="{% if active_page == 'all_courses' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <svg class="mr-3 h-6 w-6 {% if active_page == 'all_courses' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                             Все курсы
                         </a>
 
                         <a href="{% url 'chat_list' %}"
-                           class="{% if active_page == 'chats' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                            <svg class="mr-3 h-6 w-6 {% if active_page == 'chats' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                           class="{% if active_page == 'chats' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <svg class="mr-3 h-6 w-6 {% if active_page == 'chats' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                             </svg>
                             Чаты
                         </a>
 
                         <a href="{% url 'settings' %}"
-                           class="{% if active_page == 'settings' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                            <svg class="mr-3 h-6 w-6 {% if active_page == 'settings' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                           class="{% if active_page == 'settings' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <svg class="mr-3 h-6 w-6 {% if active_page == 'settings' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                             Настройки
                         </a>
 
                         <a href="{% url 'help' %}"
-                           class="{% if active_page == 'help' %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                            <svg class="mr-3 h-6 w-6 {% if active_page == 'help' %}text-white{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
+                           class="{% if active_page == 'help' %}bg-primary text-gray-900 shadow-md{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <svg class="mr-3 h-6 w-6 {% if active_page == 'help' %}text-gray-900{% else %}text-gray-400 group-hover:text-gray-500{% endif %}"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             Помощь
                         </a>
@@ -239,7 +240,7 @@
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                             </svg>
                             Выход
                         </a>
@@ -287,7 +288,8 @@
                 <span class="sr-only">Открыть меню</span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </div>
