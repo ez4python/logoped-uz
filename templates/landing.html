@@ -20,13 +20,14 @@
                                 индивидуальным подходом к каждому ребенку.
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                <div class="rounded-md shadow">
+                                <div class="rounded-md shadow" style="background-color: #FFA500">
                                     <a href="{% url 'register' %}"
-                                       class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-primary hover:bg-primary-dark md:py-4 md:text-lg md:px-10">
+                                       class="text-white w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-primary hover:bg-primary-dark md:py-4 md:text-lg md:px-10">
                                         Начать бесплатно
                                     </a>
                                 </div>
-                                <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <div class="mt-3 sm:mt-0 sm:ml-3 rounded-md shadow"
+                                     style="background-color: #D4EDDA; color: #28A745">
                                     <a href="#how-it-works"
                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-primary-light hover:bg-primary-light md:py-4 md:text-lg md:px-10">
                                         Как это работает
@@ -37,10 +38,10 @@
                     </main>
                 </div>
             </div>
-{#            <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">#}
-{#                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"#}
-{#                     src="{% static 'images/hero-image.svg' %}" alt="Логопедические занятия">#}
-{#            </div>#}
+            {#            <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">#}
+            {#                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"#}
+            {#                     src="{% static 'images/hero-image.svg' %}" alt="Логопедические занятия">#}
+            {#            </div>#}
         </div>
 
         <!-- Feature section -->
@@ -258,7 +259,7 @@
                 </h2>
                 <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
                     <div class="inline-flex rounded-md shadow">
-                        <a href="{% url 'register' %}"
+                        <a href="{% url 'register' %}" style="background-color: #FFA500; color: white"
                            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50">
                             Зарегистрироваться бесплатно
                         </a>

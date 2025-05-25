@@ -13,7 +13,6 @@ class AllCoursesView(LoginRequiredMixin, ListView):
     model = Course
     template_name = 'dashboard/all_courses.html'
     context_object_name = 'courses'
-    paginate_by = 9
     login_url = reverse_lazy('login')
 
     def get_queryset(self):
@@ -60,12 +59,22 @@ class EnrollCourseView(LoginRequiredMixin, View):
             messages.error(request, 'В этом курсе пока нет заданий.')
             return redirect('all_courses')
 
-        # Check if user already enrolled (has any completed assignment in course)
-        existing_assignments = Assignment.objects.filter(course=course, completed_assignments__user=request.user)
+        # Check if user already enrolled
+        existing_assignments = Assignment.objects.filter(
+            course=course,
+            completed_assignments__user=request.user
+        )
 
         if existing_assignments.exists():
             messages.info(request, 'Вы уже записаны на этот курс.')
             return redirect('course_detail', course_id=course_id)
+
+        # ✅ Foydalanuvchini kursga bog‘lash: birinchi mashqni tayyorlash
+        first_assignment = assignments.first()
+        CompletedAssignment.objects.create(
+            user=request.user,
+            assignment=first_assignment
+        )
 
         messages.success(request, f'Вы успешно записались на курс "{course.title}".')
         return redirect('course_detail', course_id=course_id)

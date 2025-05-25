@@ -5,7 +5,7 @@
 {% block content %}
     <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-{#            <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="mx-auto h-12 w-auto">#}
+            {#            <img src="{% static 'images/logo.svg' %}" alt="Логопед Онлайн" class="mx-auto h-12 w-auto">#}
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Вход в аккаунт</h2>
             <p class="mt-2 text-center text-sm text-gray-600">
                 Еще нет аккаунта?
@@ -26,10 +26,10 @@
                         {% endfor %}
                     {% endif %}
 
-                    <div>
+                    <div style="text-align: center">
                         <label for="phone" class="block text-sm font-medium text-gray-700">Номер телефона</label>
                         <div class="mt-1">
-                            <input id="phone" name="phone_number" type="tel" autocomplete="tel" required
+                            <input style="text-align: center" id="phone" name="phone_number" type="tel" autocomplete="tel" required
                                    class="form-control"
                                    placeholder="+998 XX XXX XX XX"
                                    x-model="phone"
@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div style="background-color: #FFA500; color: white; border-radius: 5px">
                         <button type="submit" class="w-full btn btn-primary">
                             Получить код
                         </button>
