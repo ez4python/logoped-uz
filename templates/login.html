@@ -20,7 +20,8 @@
 
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %}">
+                            <div style="text-align: center"
+                                 class="notification {% if message.tags %}notification-{{ message.tags }}{% endif %}">
                                 {{ message }}
                             </div>
                         {% endfor %}
@@ -29,12 +30,14 @@
                     <div style="text-align: center">
                         <label for="phone" class="block text-sm font-medium text-gray-700">Номер телефона</label>
                         <div class="mt-1">
-                            <input style="text-align: center" id="phone" name="phone_number" type="tel" autocomplete="tel" required
+                            <input style="text-align: center" id="phone" name="phone_number" type="tel"
+                                   autocomplete="tel" required
                                    class="form-control"
                                    placeholder="+998 XX XXX XX XX"
                                    x-model="phone"
                                    x-mask="+998 99 999 99 99">
                         </div>
+                        <p class="mt-2 text-xs text-gray-500">Мы отправим код подтверждения на этот номер</p>
                     </div>
 
                     <div style="background-color: #FFA500; color: white; border-radius: 5px">

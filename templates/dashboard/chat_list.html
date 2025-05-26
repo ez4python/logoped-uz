@@ -22,8 +22,8 @@
                     <a href="{% url 'chat_detail' chat_user.id %}" class="block hover:bg-gray-50">
                         <div class="px-6 py-4 flex items-center">
                             <div class="flex-shrink-0">
-                                {% if chat_user.image %}
-                                    <img class="h-12 w-12 rounded-full" src="{{ chat_user.image.url }}"
+                                {% if chat_user.avatar %}
+                                    <img class="h-12 w-12 rounded-full" src="{{ chat_user.avatar.url }}"
                                          alt="{{ chat_user.get_full_name }}">
                                 {% else %}
                                     <div class="avatar h-12 w-12 text-lg">

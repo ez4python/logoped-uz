@@ -8,7 +8,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path('courses/', AllCoursesView.as_view(), name='all_courses'),
+    path('', AllCoursesView.as_view(), name='all_courses'),
     path('courses/<int:course_id>/enroll/', EnrollCourseView.as_view(), name='enroll_course'),
     path('courses/<int:course_id>/', CourseDetailView.as_view(), name='course_detail'),
     path('assignments/<int:assignment_id>/complete/', MarkAssignmentCompletedView.as_view(),

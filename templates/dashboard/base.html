@@ -246,12 +246,12 @@
                         </a>
                     </nav>
                 </div>
-                <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+                <div class="flex-shrink-0 flex border-t border-gray-200 p-4" style="background-color: #00ffe9">
                     <a href="{% url 'settings' %}" class="flex-shrink-0 w-full group block">
                         <div class="flex items-center">
                             <div>
-                                {% if user.image %}
-                                    <img class="inline-block h-9 w-9 rounded-full" src="{{ user.image.url }}"
+                                {% if user.avatar %}
+                                    <img class="inline-block h-9 w-9 rounded-full" src="{{ user.avatar.url }}"
                                          alt="{{ user.get_full_name }}">
                                 {% else %}
                                     <div class="avatar">
