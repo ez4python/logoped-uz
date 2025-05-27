@@ -57,14 +57,14 @@
                                 {% endif %}
 
                                 {% if message.image %}
-                                    <div class="mt-2">
+                                    <div class="mt-2" style="width: 150px; height: 150px">
                                         <img src="{{ message.image.url }}" alt="Изображение"
                                              class="rounded-md max-w-full">
                                     </div>
                                 {% endif %}
 
                                 {% if message.video %}
-                                    <div class="mt-2">
+                                    <div class="mt-2" style="width: 150px; height: 150px">
                                         <video controls class="rounded-md max-w-full">
                                             <source src="{{ message.video.url }}" type="video/mp4">
                                             Ваш браузер не поддерживает видео.
