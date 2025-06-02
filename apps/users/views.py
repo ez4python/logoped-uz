@@ -5,12 +5,13 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
+from django.db.models.aggregates import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView, TemplateView, UpdateView
 
-from apps.exercises.models import Assignment, CompletedAssignment
+from apps.exercises.models import Assignment, CompletedAssignment, Course
 from apps.users.forms import (
     PhoneNumberForm, VerificationCodeForm, FullNameForm,
     UserProfileForm, UserAvatarForm, ContactSupportForm
@@ -241,28 +242,21 @@ class ResendCodeView(View):
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
+    model = Course
     template_name = 'dashboard/index.html'
+    context_object_name = 'courses'
     login_url = reverse_lazy('login')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        # Faqat yozilgan kurslar
         completed_assignments = CompletedAssignment.objects.filter(user=self.request.user)
-        completed_ids = completed_assignments.values_list('assignment_id', flat=True)
+        course_ids = completed_assignments.values_list('assignment__course_id', flat=True).distinct()
+        enrolled_courses = Course.objects.filter(id__in=course_ids)
 
-        all_assignments = Assignment.objects.all()
-        total = all_assignments.count()
-        completed = completed_assignments.count()
-
-        percentage = int((completed / total) * 100) if total > 0 else 0
-
-        context['assignments'] = all_assignments
-        context['completed_assignment_ids'] = set(completed_ids)
-        context['total_assignments'] = total
-        context['completed_assignments'] = completed
-        context['completion_percentage'] = percentage
+        context['enrolled_courses'] = enrolled_courses
         context['active_page'] = 'dashboard'
-
         return context
 
 
