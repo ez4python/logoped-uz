@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Логопед Онлайн - Исправление речевых нарушений{% endblock %}
+
+{% block content %}
+    <div class="bg-white">
+        <!-- Hero section -->
+        <div class="relative bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto">
+                <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                    <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                        <div class="sm:text-center lg:text-left">
+                            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                                <span class="block xl:inline">Исправляем речевые</span>
+                                <span class="block text-primary xl:inline">нарушения онлайн</span>
+                            </h1>
+                            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                Профессиональная платформа для коррекции фонетико-фонематических нарушений с
+                                индивидуальным подходом к каждому ребенку.
+                            </p>
+                            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                                <div class="rounded-md shadow" style="background-color: #FFA500">
+                                    <a href="{% url 'register' %}"
+                                       class="text-white w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-primary hover:bg-primary-dark md:py-4 md:text-lg md:px-10">
+                                        Начать бесплатно
+                                    </a>
+                                </div>
+                                <div class="mt-3 sm:mt-0 sm:ml-3 rounded-md shadow"
+                                     style="background-color: #D4EDDA; color: #28A745">
+                                    <a href="#how-it-works"
+                                       class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-primary-light hover:bg-primary-light md:py-4 md:text-lg md:px-10">
+                                        Как это работает
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+            {#            <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">#}
+            {#                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"#}
+            {#                     src="{% static 'images/hero-image.svg' %}" alt="Логопедические занятия">#}
+            {#            </div>#}
+        </div>
+
+        <!-- Feature section -->
+        <div class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base text-primary font-semibold tracking-wide uppercase">Для кого наша
+                        платформа</h2>
+                </div>
+
+                <div class="mt-10">
+                    <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Дети с нарушениями речи</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Наши курсы помогают детям преодолеть фонетико-фонематические нарушения и улучшить
+                                    произношение звуков.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Родители</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Помогаем родителям участвовать в процессе коррекции речи ребенка и отслеживать
+                                    прогресс занятий.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Логопеды</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Предоставляем инструменты для эффективной работы с детьми и мониторинга их прогресса
+                                    в удобном формате.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How it works section -->
+        <div id="how-it-works" class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base text-primary font-semibold tracking-wide uppercase">Как это работает</h2>
+                </div>
+
+                <div class="mt-10">
+                    <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-10">
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <span class="text-lg font-bold">1</span>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Регистрация</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Создайте аккаунт, указав только номер телефона для получения доступа к платформе.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <span class="text-lg font-bold">2</span>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Выбор курса</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Выберите подходящий курс из каталога в зависимости от речевых нарушений.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <span class="text-lg font-bold">3</span>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Выполнение упражнений</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Проходите упражнения в удобном темпе, получая обратную связь от специалистов.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <span class="text-lg font-bold">4</span>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Отслеживание прогресса</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Наблюдайте за улучшениями и получайте рекомендации для дальнейшего развития.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features section -->
+        <div class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base text-primary font-semibold tracking-wide uppercase">Наши преимущества</h2>
+                </div>
+
+                <div class="mt-10">
+                    <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-x-8 md:gap-y-10">
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Профессиональный подход</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Все курсы разработаны опытными логопедами с учетом современных методик коррекции
+                                    речи.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Удобный график</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Занимайтесь в любое удобное время, без привязки к расписанию и местоположению.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Индивидуальный подход</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Каждый курс адаптируется под конкретные потребности ребенка с учетом его
+                                    особенностей.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-16">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Обратная связь</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Получайте комментарии и рекомендации от специалистов после каждого выполненного
+                                    упражнения.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA section -->
+        <div class="bg-primary">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                    <span class="block">Начните исправлять речевые нарушения уже сегодня</span>
+                    <span class="block text-primary-light">Присоединяйтесь к нашей платформе и помогите вашему ребенку говорить правильно и уверенно.</span>
+                </h2>
+                <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="{% url 'register' %}" style="background-color: #FFA500; color: white"
+                           class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50">
+                            Зарегистрироваться бесплатно
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

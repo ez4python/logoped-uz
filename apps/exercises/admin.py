@@ -1,22 +1,36 @@
 from django.contrib import admin
-from apps.exercises.models import Exercise, Assignment, Submission
+from apps.exercises.models import Course, Assignment
 
 
-@admin.register(Exercise)
-class ExerciseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'audio_file', 'image')
-    search_fields = ('title', 'description')
+class AssignmentInline(admin.TabularInline):
+    model = Assignment
+    extra = 1
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at')
+    search_fields = ('title',)
+    inlines = [AssignmentInline]
 
 
 @admin.register(Assignment)
 class AssignmentAdmin(admin.ModelAdmin):
-    list_display = ('exercise', 'student', 'therapist', 'assigned_at', 'deadline')
-    list_filter = ('assigned_at', 'deadline')
-    search_fields = ('exercise__title', 'student__first_name', 'therapist__first_name')
+    list_display = ('title', 'course', 'order', 'has_media')
+    list_filter = ('course',)
+    search_fields = ('title', 'course__title')
+    ordering = ('course', 'order')
 
+    def has_media(self, obj):
+        if obj.audio and obj.video:
+            return "Аудио + Видео"
+        elif obj.audio:
+            return "Аудио"
+        elif obj.video:
+            return "Видео"
+        elif obj.image:
+            return "Фото"
+        else:
+            return "Нет"
 
-@admin.register(Submission)
-class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ('assignment', 'submitted_at', 'is_checked', 'mark')
-    list_filter = ('is_checked', 'submitted_at')
-    search_fields = ('assignment__exercise__title', 'assignment__student__first_name')
+    has_media.short_description = "Медиа"

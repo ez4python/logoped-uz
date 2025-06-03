@@ -1,60 +1,52 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
-class Exercise(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    audio_file = models.FileField(upload_to='exercises/', blank=True, null=True)
-    image = models.ImageField(upload_to='exercise_images/', blank=True, null=True)
+class Course(models.Model):
+    title = models.CharField(max_length=200, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Описание")
+    image = models.ImageField(upload_to='courses/images/', verbose_name='Фото')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано в")
+    students = models.ManyToManyField(User, blank=True, related_name='Ученики',
+                                      related_query_name='enrolled_courses')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'Exercise'
-        verbose_name_plural = 'Exercises'
-        db_table = 'exercises'
+        verbose_name = "Курс"
+        verbose_name_plural = "Курсы"
 
 
 class Assignment(models.Model):
-    exercise = models.ForeignKey('exercises.Exercise', on_delete=models.CASCADE)
-    student = models.ForeignKey(
-        'users.User',
-        on_delete=models.CASCADE,
-        related_name='student_assignments',
-        limit_choices_to={'is_student': True}
-    )
-    therapist = models.ForeignKey(
-        'users.User',
-        on_delete=models.CASCADE,
-        related_name='therapist_assignments',
-        limit_choices_to={'is_therapist': True}
-    )
-    assigned_at = models.DateTimeField(auto_now_add=True)
-    deadline = models.DateField(null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='assignments', verbose_name="Курс")
+    title = models.CharField(max_length=200, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Описание")
+    audio = models.FileField(upload_to='assignments/audio/', null=True, blank=True, verbose_name="Аудио")
+    video = models.FileField(upload_to='assignments/video/', null=True, blank=True, verbose_name="Видео")
+    image = models.ImageField(upload_to='assignments/images/', null=True, blank=True, verbose_name="Фото")
+    order = models.PositiveIntegerField(default=0, verbose_name="Номер последовательности")
 
     def __str__(self):
-        return f"{self.exercise.title} → {self.student.get_full_name()}"
+        return f"{self.course.title} - {self.title}"
 
     class Meta:
-        verbose_name = 'Assignment'
-        verbose_name_plural = 'Assignments'
-        db_table = 'assignments'
+        verbose_name = "Задание"
+        verbose_name_plural = "Задании"
+        ordering = ['course', 'order']
 
 
-class Submission(models.Model):
-    assignment = models.ForeignKey('exercises.Assignment', on_delete=models.CASCADE)
-    submitted_at = models.DateTimeField(auto_now_add=True)
-    audio_answer = models.FileField(upload_to='submissions/audio/', blank=True, null=True)
-    text_answer = models.TextField(blank=True)
-    feedback = models.TextField(blank=True)
-    is_checked = models.BooleanField(default=False)
-    mark = models.IntegerField(null=True, blank=True)
+class CompletedAssignment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='completed_by')
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='completed_assignments')
+    completed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.assignment} - Submission"
+        return f"{self.user} completed {self.assignment}"
 
     class Meta:
-        verbose_name = 'Submission'
-        verbose_name_plural = 'Submissions'
-        db_table = 'submissions'
+        verbose_name = "Выполненное задание"
+        verbose_name_plural = "Выполненные задании"
+        unique_together = ('user', 'assignment')

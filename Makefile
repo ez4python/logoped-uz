@@ -13,11 +13,5 @@ clean-migrations:
 	find apps/ -path "*/migrations/*.py" ! -name "__init__.py" -delete
 	rm -rf db.sqlite3
 
-start:
-	docker start redis_db
-
-stop:
-	docker start redis_db
-
-check:
+keys:
 	docker exec -it redis_db redis-cli keys '*'

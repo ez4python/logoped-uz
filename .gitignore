@@ -7,8 +7,9 @@
 [Ss]cripts
 pyvenv.cfg
 .venv
-pip-selfcheck.json
+venv
 .idea
+pip-selfcheck.json
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -99,7 +100,7 @@ __pypackages__/
 celerybeat-schedule
 celerybeat.pid
 *.sage.py
-.env
+.env*
 env/
 venv/
 ENV/
@@ -115,4 +116,4 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
-*.env
+media
