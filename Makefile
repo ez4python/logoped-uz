@@ -15,3 +15,4 @@ clean-migrations:
 
 keys:
 	docker exec -it redis_db redis-cli keys '*'
+
